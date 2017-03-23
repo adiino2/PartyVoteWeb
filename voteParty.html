@@ -1,0 +1,250 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <script src="/Chart.js"></script>
+    <script src="/Chart.min.js"></script>
+    <link rel="stylesheet" href="/StyleSheet.css" />
+    <title>Fight the power</title>
+    <meta charset="utf-8" />
+</head>
+<body>
+
+    <script language="javascript">
+
+        
+
+        //Olika frågor
+        var questionArray = [
+          ["<h3>Det borde inte vara arbetsförmedlingens uppgift att hitta jobb åt arbetssökande</h3>", "Håller med", "Håller inte med", "Avstår"],
+          ["<h3>Solariesolning för personer under 18 år bör förbjudas</h3>", "Håller med", "Håller inte med", "Avstår"],
+          ["<h3>Det borde vara förbjudet att maskera sig vid idrottsarrangemang</h3>", "Håller med", "Håller inte med", "Avstår"],
+          ["<h3>Åldersgränsen för att få delta i sprututbytesverksamheten borde sänkas från 20 år till 18 år</h3>", "Håller med", "Håller inte med", "Avstår"],
+          ["<h3>Sverige borde även under 2017 delta i Natos utbildnings- och rådgivningsinsats, RSM, i Afghanistan</h3>", "Håller med", "Håller inte med", "Avstår"],
+          ["<h3>Användandet av falska polisbilar borde kriminaliseras</h3>", "Håller med", "Håller inte med", "Avstår"],
+          ["<h3>Klimatavtalet från Paris borde godkännas</h3>", "Håller med", "Håller inte med", "Avstår"]
+        ];
+
+        //Hur partierna förhåller sig (1 = ja, -1 = nej)
+        //S, M, SD, MP, C, V, L, KD
+        var keyArray = [
+          [-1, 1, 1, -1, 1, -1, 1, 1],
+          [1, -1, 0, 1, -1, 1, -1, 1],
+          [1, 1, 1, 1, 1, -1, 1, 1],
+          [1, -1, 1, 1, 1, 1, 1, 1],
+          [1, 1, -1, 1, 1, -1, 1, 1],
+          [-1, 1, 1, -1, 1, -1, 1, 1],
+          [1, 1, -1, 1, 1, 1, 1, 1]
+        ];
+
+        var previousQ = [];
+        var nrofQ = 7;   //ANTAL FRÅGOR 
+        //Skriv ut frågor -> 
+        for (var i = 0; i < nrofQ; i++) {
+            var slumptal;
+            //Slumpa fram olika frågor.
+            slumptal = Math.floor((Math.random() * questionArray.length)); //Random 0-length of array
+            
+            while (previousQ.indexOf(slumptal) > -1) {
+                slumptal = Math.floor((Math.random() * nrofQ));
+            }
+
+            previousQ[i] = slumptal;
+
+            document.write("<center><form><span class='question'>" + questionArray[slumptal][0] + "</span><br>");
+            for (var x = 1; x < 4; x++) {
+                document.write("<input type='radio' class='answer' name='answer' value='" + questionArray[slumptal][x] + "'>" + questionArray[slumptal][x] + "");
+
+            }
+            document.write("</form></center><br>");
+        }
+
+
+        //Lyssna efter klick
+        var inputs = document.getElementsByTagName('input');
+        for (var i = 0; i < inputs.length; i++) {
+            inputs[i].addEventListener('click', check);
+        }
+
+
+
+        var userAnswers = [];
+
+        //Se vad personen svarat
+        function check() {
+
+            userAnswers = [];
+            var c = 0;
+            for (var i = 0; i < inputs.length; i++) {
+                if (inputs[i].checked) {
+                    userAnswers.push(i % 3);
+                    c++;
+                }
+            }
+            if (c == nrofQ) rate();
+        }
+
+
+        var userParty = [0, 0, 0, 0, 0, 0, 0, 0]; //Antal som överränsstämmer med parti
+        var svarade = 0; //Antal frågor som personen svarade ja eller nej på
+        //Summera svaren
+        function rate() {
+            userParty = [0, 0, 0, 0, 0, 0, 0, 0];
+            svarade = 0;
+            console.log(userAnswers);
+            for (var i = 0; i < userAnswers.length; i++) {
+                if (userAnswers[i] == '0') {
+                    svarade = svarade + 1;
+                    for (var j = 0; j < 8; j++) { //8 is the number of parties
+                        if (keyArray[previousQ[i]][j] == '1') {
+                            userParty[j] = userParty[j] + keyArray[previousQ[i]][j];
+                        }
+                    }
+                }
+                else if (userAnswers[i] == '1') {
+                    svarade = svarade + 1;
+                    for (var j = 0; j < 8; j++) { //8 = nr of parties
+                        if (keyArray[previousQ[i]][j] == '-1') {
+                            userParty[j] = userParty[j] - keyArray[previousQ[i]][j];
+                        }
+                    }
+                }
+            }
+            console.log(userParty);
+
+            //Visa det populäraste partiet
+            document.getElementById("results").innerHTML = "<center><h2> Du röstar som: </h2></center> <br>";
+            document.getElementById("results1").innerHTML = "";
+            document.getElementById("results2").innerHTML = "";
+            document.getElementById("results3").innerHTML = "";
+            document.getElementById("results4").innerHTML = "";
+            document.getElementById("results5").innerHTML = "";
+            document.getElementById("results6").innerHTML = "";
+            document.getElementById("results7").innerHTML = "";
+            document.getElementById("results8").innerHTML = "";
+            var xx = 0;
+            var stopfor = 0;
+            for (var cntet = svarade; cntet > -1; cntet--) { //Kolla max Ja till 0
+                for (var i = 0; i < userParty.length; i++) { //Kolla alla partier
+                    if (userParty.indexOf(cntet,xx) == i) {
+                        xx = i+1;
+                        stopfor = 1;
+                        if (i == 0) {
+                            document.getElementById("results1").innerHTML = "<img src=\"http://riksdagen.se/Views/Ui/images/logotyper-parti/small/logo-S-small.jpg\" align=\"middle\" alt=\"Logo S\" style=\"width:80px;height:80px;\"> ";
+                        }
+                        else if (i == 1) {
+                            document.getElementById("results2").innerHTML = "<img src=\"http://riksdagen.se/Views/Ui/images/logotyper-parti/small/logo-M-small.jpg\" align=\"middle\" alt=\"Logo M\" style=\"width:80px;height:80px;\"> ";
+                        }
+                        else if (i == 2) {
+                            document.getElementById("results3").innerHTML = "<img src=\"http://riksdagen.se/Views/Ui/images/logotyper-parti/small/logo-SD-small.jpg\" align=\"middle\" alt=\"Logo SD\" style=\"width:80px;height:80px;\"> ";
+                        }
+                        else if (i == 3) {
+                            document.getElementById("results4").innerHTML = "<img src=\"http://riksdagen.se/Views/Ui/images/logotyper-parti/small/logo-MP-small.jpg\" align=\"middle\" alt=\"Logo MP\" style=\"width:80px;height:80px;\"> ";
+                        }
+                        else if (i == 4) {
+                            document.getElementById("results5").innerHTML = "<img src=\"http://riksdagen.se/Views/Ui/images/logotyper-parti/small/logo-C-small.jpg\" align=\"middle\" alt=\"Logo C\" style=\"width:80px;height:80px;\"> ";
+                        }
+                        else if (i == 5) {
+                            document.getElementById("results6").innerHTML = "<img src=\"http://riksdagen.se/Views/Ui/images/logotyper-parti/small/logo-V-small.jpg\" align=\"middle\" alt=\"Logo V\" style=\"width:80px;height:80px;\"> ";
+                        }
+                        else if (i == 6) {
+                            document.getElementById("results7").innerHTML = "<img src=\"http://riksdagen.se/Views/Ui/images/logotyper-parti/small/logo-L-small.jpg\" align=\"middle\" alt=\"Logo L\" style=\"width:80px;height:80px;\"> ";
+                        }
+                        else if (i == 7) {
+                            document.getElementById("results8").innerHTML = "<img src=\"http://riksdagen.se/Views/Ui/images/logotyper-parti/small/logo-KD-small.jpg\" align=\"middle\" alt=\"Logo KD\" style=\"width:80px;height:80px;\"> ";
+                        }
+                    }
+                }
+                if (stopfor == 1) {
+                    break;
+                }
+            }
+
+
+            answer();
+        }
+
+
+        function answer() {
+            for (var i = 0; i < userParty.length; i++) {
+                userParty[i] = userParty[i] / svarade * 100;
+                userParty[i] = Math.floor(userParty[i]);
+            }
+            showresults(); //Show results
+        }
+
+        function showresults() {
+            document.getElementById("results9").innerHTML = "<canvas id=\"myChart\" width=\"100\" height=\"40px\"></canvas>"
+            window.scrollTo(0, document.body.scrollHeight);
+            generateGraph();
+        }
+
+        function Restart() {
+            location.reload(true);
+        }
+
+        function generateGraph() {
+            var ctx = document.getElementById("myChart");
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ["S", "M", "SD", "MP", "C", "V", "L", "KD"],
+                    datasets: [{
+                        label: '%',
+                        data: userParty,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(0,0,255, 0.2)',
+                            'rgba(255,255,0, 0.2)',
+                            'rgba(0,128,0, 0.2)',
+                            'rgba(128,128,128, 0.2)',
+                            'rgba(255,0,0, 0.2)',
+                            'rgba(165,42,42,0.2)',
+                            'rgba(0,0,128,0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(0,0,255, 1)',
+                            'rgba(255,255,0, 1)',
+                            'rgba(0,128,0, 1)',
+                            'rgba(128,128,128, 1)',
+                            'rgba(255,0,0, 1)',
+                            'rgba(165,42,42,1)',
+                            'rgba(0,0,128,1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+        }
+
+    </script>
+
+
+    <p id="results"></p>
+    <p id="results1"></p>
+    <p id="results2"></p>
+    <p id="results3"></p>
+    <p id="results4"></p>
+    <p id="results5"></p>
+    <p id="results6"></p>
+    <p id="results7"></p>
+    <p id="results8"></p>
+    <p id="results9"></p>
+
+    <button onclick="Restart()">Gör ett nytt test</button>
+
+
+
+
+
+</body>
+</html>
