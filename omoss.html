@@ -1,0 +1,149 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="/StyleSheet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Om oss - Hitta Rätt Parti</title>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <ul>
+        <li><a href="start.html">Hem</a></li>
+        <li><a href="omoss.html">Om oss</a></li>
+    </ul> 
+
+    <center><h1>Mer information om testet</h1></center>
+
+    <div id="fraga1"></div>
+    <div id="svar1"></div>
+    <p class="bottom-three"> </p>
+    <div id="fraga2"></div>
+    <div id="svar2"></div>
+    <p class="bottom-three"> </p>
+    <div id="fraga3"></div>
+    <div id="svar3"></div>
+    <p class="bottom-three"> </p>
+    <div id="fraga4"></div>
+    <div id="svar4"></div>
+    <p class="bottom-three"> </p>
+    <div id="fraga5"></div>
+    <div id="svar5"></div>
+    <p class="bottom-three"> </p>
+    <div id="fraga6"></div>
+    <div id="svar6"></div>
+
+
+    <script>
+        var width = screen.width;
+        var height = screen.height;
+
+        if (width > height) {
+            document.getElementById("fraga1").innerHTML = "<p style=\"margin-left:32%; margin-right:32%\"><b>Varför behövs det här testet?</b></p>";
+            document.getElementById("svar1").innerHTML = "<p style=\"margin-left:32%; margin-right:32%\">" +
+                "Den här valkompassen är inte riktigt som andra test på internet. Många andra tester för att avgöra partitillhörighet skapas efter det att " +
+                "riksdagskandidater får uttala sig om hur de tänker rösta under de kommande fyra åren. Löfterna om hur man ska rösta är dock långt ifrån " +
+                "en garanterad sanning (något som Miljöpartiet visade under regering Löfven och Centerpartiet visade under regering Reinfeldt). Eftersom att vi som " +
+                "väljare inte kan avsätta personer som ljugit till oss under valkampanjen upplevde vi därför att det behövdes ett alternativt test." +
+            "</p>";
+
+            document.getElementById("fraga2").innerHTML = "<p style=\"margin-left:32%; margin-right:32%\"><b>Hur fungerar testet?</b></p>";
+            document.getElementById("svar2").innerHTML = "<p style=\"margin-left:32%; margin-right:32%\">" +
+                "Det här testet låter dig ta ställning till olika frågor som varit under omröstning de senaste åren i riksdagen och jämför sedan vilket parti " +
+                "du har störst överrensstämmelse med. Frågorna som visas slumpas inför varje test kommer från en full databas med olika omröstningar tillgängliga på " +
+                "<a href=\"http://www.riksdagen.se\" target=\"_blank\">www.riksdagen.se</a>. Vissa frågor kommer av uppenbara skäl att filtreras bort från det här testet. I det här testet kommer du exempelvis aldrig hitta frågor " +
+                "som beslutas genom acklamation (muntlig omröstning) av det uppenbara skäl att det helt enkelt inte går att avgöra vem som röstade vad. På samma sätt " +
+                "utesluts voteringar som enbart handlar om att undersöka något närmare då detta oftast är av minimalt intresse i förhållande till faktiska lagändringar." +
+           "</p>";
+
+            document.getElementById("fraga3").innerHTML = "<p style=\"margin-left:32%; margin-right:32%\"><b>Hur beräknas resultatet?</b></p>";
+            document.getElementById("svar3").innerHTML = "<p style=\"margin-left:32%; margin-right:32%\">" +
+                "Resultatet beräknas utifrån hur du röstar i förhållande till de olika partierna. Om du exempelvis röstar exakt likadant som Socialdemokraterna röstade kommer " +
+                "du få 100 % på socialdemokraterna. På liknande sätt kan du få 0 % om du röstar precis motsatt till vad partiet röstade. Ibland är det inte möjligt att få 0% eller 100 % om ett parti har varit oense om en fråga och vissa röstat ja och andra nej. Testet " +
+                "tar då i hänsyn hur stor andel av partiet som röstade ja och hur stor andel som röstade nej och resultatet påverkas därefter. Om du avstår från att rösta på en " +
+                "fråga räknas den inte med i slutresultatet." +
+            "</p>";
+
+            document.getElementById("fraga4").innerHTML = "<p style=\"margin-left:32%; margin-right:32%\"><b>Kan jag lita på testet?</b></p>";
+            document.getElementById("svar4").innerHTML = "<p style=\"margin-left:32%; margin-right:32%\">" +
+                "Självklart! Men man ska alltid vara källkritisk och allt material vi använt finns fritt tillgängligt i protokollen på <a href=\"http://www.riksdagen.se\" target=\"_blank\">www.riksdagen.se</a>." +
+            "</p>";
+
+            document.getElementById("fraga5").innerHTML = "<p style=\"margin-left:32%; margin-right:32%\"><b>Borde jag rösta på det parti testet med störst matchning?</b></p>";
+            document.getElementById("svar5").innerHTML = "<p style=\"margin-left:32%; margin-right:32%\">" +
+                "Inte nödvändigtvis, men en legitim fråga till partierna blir då vad de tänker göra annorlunda den här mandatperioden. Politiker " +
+                "ska vara folkets representanter och det här är enbart ett verktyg att kontrollera hur väl de olika partierna representerat dina " +
+                "åsikter under de föregående åren. Hur framtiden ser ut och vilket parti som kommer att vara den stora lögnaren inför det här " +
+                "valet återstår att se. Men fram till dess att vi som väljare får möjligheten att infrågasätta våra valda representanter och " +
+                "återkalla förtroendet för de som ljög till oss under valet är tidigare handlingar väldigt viktiga." +
+            "</p>";
+
+            document.getElementById("fraga6").innerHTML = "<p style=\"margin-left:32%; margin-right:32%\"><b>Vilka partier matchas jag mot?</b></p>";
+            document.getElementById("svar6").innerHTML = "<p style=\"margin-left:32%; margin-right:32%\">" +
+                "Du matchas enbart mot de åtta riksdagspartier som hade möjlighet att rösta i riksdagen de senaste åren. Partier som exempelvis Feministiskt Initiativ förekommer " +
+                "därför inte i resultaten. På samma sätt filtreras politiska vildar (personer som väljs in i riksdagen, går ur partiet de blev invalda genom och vägrar lämna ifrån " +
+                "sig sin riksdagsplats) bort från omröstningsresultaten." +
+            "</p>";
+
+
+        }
+        else {
+            document.getElementById("fraga1").innerHTML = "<b>Varför behövs det här testet?</b>";
+            document.getElementById("svar1").innerHTML = "<p>" +
+                "Den här valkompassen är inte riktigt som andra test på internet. Många andra tester för att avgöra partitillhörighet skapas efter det att " +
+                "riksdagskandidater får uttala sig om hur de tänker rösta under de kommande fyra åren. Löfterna om hur man ska rösta är dock långt ifrån " +
+                "en garanterad sanning (något som Miljöpartiet visade under regering Löfven och Centerpartiet visade under regering Reinfeldt). Eftersom att vi som " +
+                "väljare inte kan avsätta personer som ljugit till oss under valkampanjen upplevde vi därför att det behövdes ett alternativt test." +
+            "</p>";
+
+            document.getElementById("fraga2").innerHTML = "<p><b>Hur fungerar testet?</b></p>";
+            document.getElementById("svar2").innerHTML = "<p>" +
+                "Det här testet låter dig ta ställning till olika frågor som varit under omröstning de senaste åren i riksdagen och jämför sedan vilket parti " +
+                "du har störst överrensstämmelse med. Frågorna som visas slumpas inför varje test kommer från en full databas med olika omröstningar tillgängliga på " +
+                "<a href=\"http://www.riksdagen.se\" target=\"_blank\">www.riksdagen.se</a>. Vissa frågor kommer av uppenbara skäl att filtreras bort från det här testet. I det här testet kommer du exempelvis aldrig hitta frågor " +
+                "som beslutas genom acklamation (muntlig omröstning) av det uppenbara skäl att det helt enkelt inte går att avgöra vem som röstade vad. På samma sätt " +
+                "utesluts voteringar som enbart handlar om att undersöka något närmare då detta oftast är av minimalt intresse i förhållande till faktiska lagändringar." +
+           "</p>";
+
+            document.getElementById("fraga3").innerHTML = "<p><b>Hur beräknas resultatet?</b></p>";
+            document.getElementById("svar3").innerHTML = "<p>" +
+                "Resultatet beräknas utifrån hur du röstar i förhållande till de olika partierna. Om du exempelvis röstar exakt likadant som Socialdemokraterna röstade kommer " +
+                "du få 100 % på socialdemokraterna. På liknande sätt kan du få 0 % om du röstar precis motsatt till vad partiet röstade. Ibland är det inte möjligt att få 0% eller 100 % om ett parti har varit oense om en fråga och vissa röstat ja och andra nej. Testet " +
+                "tar då i hänsyn hur stor andel av partiet som röstade ja och hur stor andel som röstade nej och resultatet påverkas därefter. Om du avstår från att rösta på en " +
+                "fråga räknas den inte med i slutresultatet." +
+            "</p>";
+
+            document.getElementById("fraga4").innerHTML = "<p><b>Kan jag lita på testet?</b></p>";
+            document.getElementById("svar4").innerHTML = "<p>" +
+                "Självklart! Men man ska alltid vara källkritisk och allt material vi använt finns fritt tillgängligt i protokollen på <a href=\"http://www.riksdagen.se\" target=\"_blank\">www.riksdagen.se</a>." +
+            "</p>";
+
+            document.getElementById("fraga5").innerHTML = "<p><b>Borde jag rösta på det parti testet med störst matchning?</b></p>";
+            document.getElementById("svar5").innerHTML = "<p>" +
+                "Inte nödvändigtvis, men en legitim fråga till partierna blir då vad de tänker göra annorlunda den här mandatperioden. Politiker " +
+                "ska vara folkets representanter och det här är enbart ett verktyg att kontrollera hur väl de olika partierna representerat dina " +
+                "åsikter under de föregående åren. Hur framtiden ser ut och vilket parti som kommer att vara den stora lögnaren inför det här " +
+                "valet återstår att se. Men fram till dess att vi som väljare får möjligheten att infrågasätta våra valda representanter och " +
+                "återkalla förtroendet för de som ljög till oss under valet är tidigare handlingar väldigt viktiga." +
+            "</p>";
+
+            document.getElementById("fraga6").innerHTML = "<p><b>Vilka partier matchas jag mot?</b></p>";
+            document.getElementById("svar6").innerHTML = "<p>" +
+                "Du matchas enbart mot de åtta riksdagspartier som hade möjlighet att rösta i riksdagen de senaste åren. Partier som exempelvis Feministiskt Initiativ förekommer " +
+                "därför inte i resultaten. På samma sätt filtreras politiska vildar (personer som väljs in i riksdagen, går ur partiet de blev invalda genom och vägrar lämna ifrån " +
+                "sig sin riksdagsplats) bort från omröstningsresultaten." +
+            "</p>";
+
+        }
+
+
+    </script>
+
+    
+
+    <p class="bottom-three"> </p>
+
+</body>
+</html>

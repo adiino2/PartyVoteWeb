@@ -1,0 +1,341 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    
+    <script src="/Chart.js"></script>
+    <script src="/Chart.min.js"></script>
+
+    
+
+    
+
+    <link rel="stylesheet" href="/StyleSheet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Hitta Rätt Parti</title>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <ul>
+        <li><a href="start.html">Hem</a></li>
+        <li><a href="omoss.html">Om oss</a></li>
+    </ul> 
+
+    
+
+    <script language="javascript">
+
+        //------------------------------------
+        //
+        //  Senast uppdaterad: 26/3
+        //
+        //  Logg: 26/3 = Gjorde den adaptiv för mobiltelefoner 
+        //      25/3 = Fixade om svar inte är heltal, uppdatera utseende chart
+        //
+        //
+        //
+        //  Lägg till inläsning av keyArray och questionarray i headern
+        //
+        //--------------------------------------
+        
+
+        var questionArray = [
+            ["<h3>Det bör finnas aktiva åtgärder inom arbetslivet och utbildningsområdet som ska vara förebyggande och främjande för att motverka diskriminering. </h3><a href=\"https://www.riksdagen.se/sv/global/sok/?q=H301AU10&p=1\" target=\"_blank\">(Mer info)</a>", "Håller med", "Håller inte med", "Avstår"],
+            ["<h3>Arbetstagare som slår larm om allvarliga missförhållanden, så kallade visselblåsare, ska kunna göra det utan att drabbas av några straff från arbetsgivaren. </h3><a href=\"https://www.riksdagen.se/sv/global/sok/?q=H301AU11&p=1\" target=\"_blank\">(Mer info)</a>", "Håller med", "Håller inte med", "Avstår"],
+            ["<h3>Kommuner ska vara tvingade att ta emot nyanlända som har beviljats uppehållstillstånd. </h3><a href=\"https://www.riksdagen.se/sv/global/sok/?q=H301AU4&p=1\" target=\"_blank\">(Mer info)</a>", "Håller med", "Håller inte med", "Avstår"],
+            ["<h3>Arbetsgivares missbruk av tillfälliga anställningar, som exempelvis när en person får flera tidsbegränsade anställningar efter varandra hos samma arbetsgivare under lång tid bör vara olagligt </h3><a href=\"https://www.riksdagen.se/sv/global/sok/?q=H301AU5&p=1\" target=\"_blank\">(Mer info)</a>", "Håller med", "Håller inte med", "Avstår"],
+            ["<h3>Regeringen bör ha möjlighet att införa regler om tidsgränser för kommunernas handläggning av ärenden som inte kräver bygglov, marklov eller rivningslov. </h3><a href=\"https://www.riksdagen.se/sv/global/sok/?q=H301CU3&p=1\" target=\"_blank\">(Mer info)</a>", "Håller med", "Håller inte med", "Avstår"],
+            ["<h3>Regeringen borde arbeta hårdare för att utveckla valfriheten inom skolan, sjukvården och äldreomsorgen. </h3><a href=\"https://www.riksdagen.se/sv/global/sok/?q=H301FiU26&p=1\" target=\"_blank\">(Mer info)</a>", "Håller med", "Håller inte med", "Avstår"],
+            ["<h3>Vid en överprövning av offentlig upphandling bör domstolarna alltid ska ta hänsyn till användarnas intresse, allmänintresset och övriga berörda intressen. </h3><a href=\"https://www.riksdagen.se/sv/global/sok/?q=H301FiU29&p=1\" target=\"_blank\">(Mer info)</a>", "Håller med", "Håller inte med", "Avstår"],
+            ["<h3>Riksbanken ska få ingå avtal om lån till Internationella valutafonden, IMF, för utlåning till låginkomstländer. </h3><a href=\"https://www.riksdagen.se/sv/global/sok/?q=H301FiU40&p=1\" target=\"_blank\">(Mer info)</a>", "Håller med", "Håller inte med", "Avstår"],
+            ["<h3>Regeringen ska ha makt att besluta om att sända väpnad styrka utomlands för övning och annan utbildning även om det inte har ett fredsfrämjande syfte. </h3><a href=\"https://www.riksdagen.se/sv/global/sok/?q=H301F\u00f6U14&p=1\" target=\"_blank\">(Mer info)</a>", "Håller med", "Håller inte med", "Avstår"],
+            ["<h3>Efter terrordåden i Frankrike den 13 november 2015 begärdes stöd från övriga EU-länder i kampen mot terrororganisationen Daish. Sverige bör lämna stöd till Frankrike i form av den ammunition som efterfrågas. </h3><a href=\"https://www.riksdagen.se/sv/global/sok/?q=H301F\u00f6U15&p=1\" target=\"_blank\">(Mer info)</a>", "Håller med", "Håller inte med", "Avstår"],
+            ["<h3>Det bör vara möjligt att återkalla eller tillfälligt dra in passet för den som är misstänkt för att förbereda eller ha påbörjat en resa i terrorismsyfte utan domstolsbeslut. </h3><a href=\"https://www.riksdagen.se/sv/global/sok/?q=H301JuU17&p=1\" target=\"_blank\">(Mer info)</a>", "Håller med", "Håller inte med", "Avstår"],
+            ["<h3>Den som sitter i fängelse för våldsbrott bör vara tvungen att gå ett behandlingsprogram. </h3><a href=\"https://www.riksdagen.se/sv/global/sok/?q=H301JuU21&p=1\" target=\"_blank\">(Mer info)</a>", "Håller med", "Håller inte med", "Avstår"],
+            ["<h3>Id-kontroller ska kunna införas på bussar, båtar och tåg som transporterar passagerare till Sverige. </h3><a href=\"https://www.riksdagen.se/sv/global/sok/?q=H301JuU24&p=1\" target=\"_blank\">(Mer info)</a>", "Håller med", "Håller inte med", "Avstår"],
+            ["<h3>Sverige och USA bör ge varandra direktåtkomst sina nationella fingeravtrycksregister. </h3><a href=\"https://www.riksdagen.se/sv/global/sok/?q=H301JuU33&p=1\" target=\"_blank\">(Mer info)</a>", "Håller med", "Håller inte med", "Avstår"],
+            ["<h3>Regeringen bör ta hänsyn till det positiva sambandet mellan kultur och hälsa i sin utformning av kulturpolitiken. </h3><a href=\"https://www.riksdagen.se/sv/global/sok/?q=H301KrU10&p=1\" target=\"_blank\">(Mer info)</a>", "Håller med", "Håller inte med", "Avstår"],
+            ["<h3>Anställda på privata skolor, sjukhus och äldreboenden borde ha samma meddelarskydd som offentligt anställd personal om verksamheten finansieras med skattemedel. </h3><a href=\"https://www.riksdagen.se/sv/global/sok/?q=H301KU18&p=1\" target=\"_blank\">(Mer info)</a>", "Håller med", "Håller inte med", "Avstår"],
+            ["<h3>Metallföremål som inte förbränts vid kremering och som skilts från askan bör återvinnas genom materialåtervinning. </h3><a href=\"https://www.riksdagen.se/sv/global/sok/?q=H301KU24&p=1\" target=\"_blank\">(Mer info)</a>", "Håller med", "Håller inte med", "Avstår"],
+            ["<h3>Statens riskkapitalinsatser bör utnyttjas bättre samt bidra till att utveckla och förnya det svenska näringslivet. </h3><a href=\"https://www.riksdagen.se/sv/global/sok/?q=H301NU23&p=1\" target=\"_blank\">(Mer info)</a>", "Håller med", "Håller inte med", "Avstår"],
+            ["<h3>Andelen förnybar el i det svenska energisystemet bör öka. </h3><a href=\"https://www.riksdagen.se/sv/global/sok/?q=H301NU6&p=1\" target=\"_blank\">(Mer info)</a>", "Håller med", "Håller inte med", "Avstår"],
+            ["<h3>Sverige bör tillfälligt införa tidsbegränsade uppehållstillstånd (2016/06). Rätten till anhöriginvandring bör begränsas och försörjningskraven skärpas. </h3><a href=\"https://www.riksdagen.se/sv/global/sok/?q=H301SfU16&p=1\" target=\"_blank\">(Mer info)</a>", "Håller med", "Håller inte med", "Avstår"],
+            ["<h3>Antalet dagar med föräldrapenning som är reserverade för en förälder och inte kan avstås till den andra föräldern, bör öka från 60 till 90 dagar. </h3><a href=\"https://www.riksdagen.se/sv/global/sok/?q=H301SfU5&p=1\" target=\"_blank\">(Mer info)</a>", "Håller med", "Håller inte med", "Avstår"],
+            ["<h3>Det kommunala vårdnadsbidraget bör avskaffas. </h3><a href=\"https://www.riksdagen.se/sv/global/sok/?q=H301SfU8&p=1\" target=\"_blank\">(Mer info)</a>", "Håller med", "Håller inte med", "Avstår"],
+            ["<h3>En person som har lämnat en felaktig uppgift vid deklarationen och fått skattetillägg som straff bör inte efteråt kunna åtalas för skattebrott för samma felaktighet. Även det omvända bör gälla. </h3><a href=\"https://www.riksdagen.se/sv/global/sok/?q=H301SkU4&p=1\" target=\"_blank\">(Mer info)</a>", "Håller med", "Håller inte med", "Avstår"],
+            ["<h3>Nya skatteregler bör införs som ska motverka att företag kan utnyttja olikheter i länders skattesystem för att slippa att betala skatt. </h3><a href=\"https://www.riksdagen.se/sv/global/sok/?q=H301SkU7&p=1\" target=\"_blank\">(Mer info)</a>", "Håller med", "Håller inte med", "Avstår"],
+            ["<h3>Staten ska betala ersättning till dem som drabbades av narkolepsi efter vaccineringen mot svininfluensan. </h3><a href=\"https://www.riksdagen.se/sv/global/sok/?q=H301SoU16&p=1\" target=\"_blank\">(Mer info)</a>", "Håller med", "Håller inte med", "Avstår"],
+            ["<h3>Ensamstående kvinnor bör ges samma möjlighet till assisterad befruktning inom svensk hälso- och sjukvård som gifta par, registrerade partner och sambor. </h3><a href=\"https://www.riksdagen.se/sv/global/sok/?q=H301SoU3&p=1\" target=\"_blank\">(Mer info)</a>", "Håller med", "Håller inte med", "Avstår"],
+            ["<h3>Landstingen bör lämna bidrag för glasögon eller kontaktlinser till vissa barn och unga mellan 8 och 19 år. </h3><a href=\"https://www.riksdagen.se/sv/global/sok/?q=H301SoU4&p=1\" target=\"_blank\">(Mer info)</a>", "Håller med", "Håller inte med", "Avstår"],
+            ["<h3>Regeringen borde jobba för att biodrivmedel oftare ska användas i luftfarten som flygbränsle. </h3><a href=\"https://www.riksdagen.se/sv/global/sok/?q=H301TU9&p=1\" target=\"_blank\">(Mer info)</a>", "Håller med", "Håller inte med", "Avstår"],
+            ["<h3>Modersmålsundervisning och studiehandledning på modersmål i grundskolan, grundsärskolan, gymnasieskolan och gymnasiesärskolan bör få överlämnas på entreprenad till en annan skolhuvudman. </h3><a href=\"https://www.riksdagen.se/sv/global/sok/?q=H301UbU18&p=1\" target=\"_blank\">(Mer info)</a>", "Håller med", "Håller inte med", "Avstår"],
+            ["<h3>Sverige bör under 2016 delta i Natos utbildnings- och rådgivningsinsats i Afghanistan. </h3><a href=\"https://www.riksdagen.se/sv/global/sok/?q=H301UF\u00f6U1&p=1\" target=\"_blank\">(Mer info)</a>", "Håller med", "Håller inte med", "Avstår"]
+        ];
+
+        var keyArray = [
+            [0.938053, -0.916667, 0.000000, 0.840000, -0.954545, 0.904762, 0.842105, -0.875000],
+            [0.884956, 0.880952, 0.770833, 1.000000, 0.863636, 0.857143, -0.894737, 0.937500],
+            [0.876106, 0.904762, -0.791667, 0.960000, 0.772727, 0.809524, 0.684211, 1.000000],
+            [0.893805, 0.880952, -0.937500, 0.920000, 1.000000, 0.857143, 0.789474, 0.812500],
+            [0.867257, 0.880952, 0.854167, 0.960000, 0.772727, -0.761905, 0.789474, 0.937500],
+            [-0.787611, 0.833333, 0.833333, -0.880000, 0.772727, -0.952381, 0.842105, 0.750000],
+            [0.920354, -0.892857, -0.895833, 0.840000, -0.909091, 0.904762, 0.947368, 0.875000],
+            [0.858407, 0.857143, -0.875000, 0.880000, 0.772727, 0.666667, 0.736842, 0.750000],
+            [0.955752, 0.916667, 0.833333, 0.840000, 0.954545, -0.809524, 0.894737, 0.875000],
+            [0.955752, 0.916667, 0.833333, 0.840000, 0.954545, -0.809524, 0.894737, 0.875000],
+            [0.849558, 0.869048, 0.916667, 0.960000, 0.818182, -0.761905, 0.631579, 0.875000],
+            [0.893805, 0.892857, 0.916667, 0.960000, 0.954545, -0.952381, 0.894737, 0.875000],
+            [0.973451, 0.000000, 0.895833, 0.880000, -0.909091, -0.857143, 0.000000, 0.000000],
+            [0.884956, 0.880952, 0.791667, 0.960000, 0.863636, -0.904762, 0.842105, 0.875000],
+            [0.849558, 0.821429, 0.937500, 0.880000, -0.863636, 0.809524, 0.894737, 0.812500],
+            [0.831858, 0.833333, -0.875000, 0.840000, 0.681818, 0.714286, 0.842105, 0.812500],
+            [0.884956, 0.916667, 0.750000, 0.960000, 0.863636, 0.904762, -0.842105, 0.875000],
+            [0.858407, 0.880952, 0.958333, 0.960000, -0.772727, 0.904762, 0.842105, 0.937500],
+            [0.814159, -0.809524, -0.306122, 0.840000, 0.772727, 0.904762, -0.789474, -0.812500],
+            [0.938053, 0.916667, 0.833333, 0.680000, -0.909091, -0.952381, -0.052632, 0.000000],
+            [0.876106, -0.892857, -0.854167, 0.960000, -0.863636, 0.904762, 0.842105, -0.875000],
+            [0.902655, -0.916667, -0.812500, 1.000000, 0.909091, 0.904762, 0.894737, -0.875000],
+            [0.867257, 0.880952, -0.833333, 0.960000, 0.772727, 0.809524, 0.789474, 0.937500],
+            [0.884956, 0.857143, -0.729167, 0.920000, 0.863636, 0.809524, 0.894737, 0.875000],
+            [0.911504, 0.880952, -0.895833, 0.800000, 0.909091, 0.857143, 0.789474, 0.875000],
+            [0.814159, 0.821429, -0.833333, 0.760000, 0.318182, 0.714286, 0.842105, 0.000000],
+            [0.902655, 0.892857, 0.895833, 0.960000, -0.954545, 0.809524, -0.842105, -0.812500],
+            [0.902655, -0.952381, 0.875000, 0.960000, -0.909091, 0.952381, -0.947368, -0.687500],
+            [0.938053, 0.916667, -0.833333, 0.840000, 0.954545, 0.952381, 0.842105, 0.875000],
+            [0.929204, 0.940476, -0.958333, 0.960000, 0.909091, -0.809524, 0.736842, 0.875000]
+        ];
+
+
+
+
+
+        var previousQ = [];
+        var nrofQ = 15;   //ANTAL FRÅGOR 
+        //Skriv ut frågor -> 
+        for (var i = 0; i < nrofQ; i++) {
+            var slumptal;
+            //Slumpa fram olika frågor.
+            slumptal = Math.floor((Math.random() * questionArray.length)); //Random 0-length of array
+            
+            while (previousQ.indexOf(slumptal) > -1) {
+                slumptal = Math.floor((Math.random() * nrofQ));
+            }
+
+            previousQ[i] = slumptal;
+
+            document.write("<center><form><span class='question'>" + questionArray[slumptal][0] + "</span><br>");
+            for (var x = 1; x < 4; x++) {
+                document.write("<input type='radio' class='answer' name='answer' value='" + questionArray[slumptal][x] + "'>" + questionArray[slumptal][x] + "");
+
+            }
+            document.write("</form></center><br>");
+        }
+
+
+        //Lyssna efter klick
+        var inputs = document.getElementsByTagName('input');
+        for (var i = 0; i < inputs.length; i++) {
+            inputs[i].addEventListener('click', check);
+        }
+
+
+
+        var userAnswers = [];
+
+        //Se vad personen svarat
+        function check() {
+
+            userAnswers = [];
+            var c = 0;
+            for (var i = 0; i < inputs.length; i++) {
+                if (inputs[i].checked) {
+                    userAnswers.push(i % 3);
+                    c++;
+                }
+            }
+            if (c == nrofQ) rate();
+        }
+
+
+        var userParty = [0, 0, 0, 0, 0, 0, 0, 0]; //Antal som överränsstämmer med parti
+        var svarade = 0; //Antal frågor som personen svarade ja eller nej på
+        //Summera svaren
+        function rate() {
+            userParty = [0, 0, 0, 0, 0, 0, 0, 0];
+            svarade = 0;
+            console.log(userAnswers);
+            for (var i = 0; i < userAnswers.length; i++) {
+                if (userAnswers[i] == '0') {
+                    svarade = svarade + 1;
+                    for (var j = 0; j < 8; j++) { //8 is the number of parties
+                        if (keyArray[previousQ[i]][j] > 0) {
+                            userParty[j] = userParty[j] + keyArray[previousQ[i]][j];
+                        }
+                    }
+                }
+                else if (userAnswers[i] == '1') {
+                    svarade = svarade + 1;
+                    for (var j = 0; j < 8; j++) { //8 = nr of parties
+                        if (keyArray[previousQ[i]][j] < 0) {
+                            userParty[j] = userParty[j] - keyArray[previousQ[i]][j];
+                        }
+                    }
+                }
+            }
+            console.log(userParty);
+
+            //Visa det populäraste partiet
+            document.getElementById("results").innerHTML = "<center><h2> Du röstar som: </h2></center> <br>";
+            document.getElementById("results1").innerHTML = "";
+            document.getElementById("results2").innerHTML = "";
+            document.getElementById("results3").innerHTML = "";
+            document.getElementById("results4").innerHTML = "";
+            document.getElementById("results5").innerHTML = "";
+            document.getElementById("results6").innerHTML = "";
+            document.getElementById("results7").innerHTML = "";
+            document.getElementById("results8").innerHTML = "";
+            var xx = 0;
+            var stopfor = 0;
+            
+            for (var cntet = svarade; cntet > -1; cntet--) { //Kolla max Ja till 0
+                for (var i = 0; i < userParty.length; i++) { //Kolla alla partier
+                    if (userParty.indexOf(Math.max.apply(Math, userParty), xx) == i) {
+                        xx = i+1;
+                        stopfor = 1;
+                        if (i == 0) {
+                            document.getElementById("results1").innerHTML = "<img src=\"s_logo.png\" align=\"middle\" alt=\"Logo S\" style=\"width:80px;height:auto;\"> ";
+                        }
+                        else if (i == 1) {
+                            document.getElementById("results2").innerHTML = "<img src=\"m_logo.png\" align=\"middle\" alt=\"Logo M\" style=\"width:80px;height:auto;\"> ";
+                        }
+                        else if (i == 2) {
+                            document.getElementById("results3").innerHTML = "<img src=\"sd_logo.png\" align=\"middle\" alt=\"Logo SD\" style=\"width:80px;height:auto;\"> ";
+                        }
+                        else if (i == 3) {
+                            document.getElementById("results4").innerHTML = "<img src=\"mp_logo.png\" align=\"middle\" alt=\"Logo MP\" style=\"width:80px;height:auto;\"> ";
+                        }
+                        else if (i == 4) {
+                            document.getElementById("results5").innerHTML = "<img src=\"c_logo.png\" align=\"middle\" alt=\"Logo C\" style=\"width:80px;height:auto;\"> ";
+                        }
+                        else if (i == 5) {
+                            document.getElementById("results6").innerHTML = "<img src=\"v_logo.png\" align=\"middle\" alt=\"Logo V\" style=\"width:80px;height:auto;\"> ";
+                        }
+                        else if (i == 6) {
+                            document.getElementById("results7").innerHTML = "<img src=\"l_logo.png\" align=\"middle\" alt=\"Logo L\" style=\"width:80px;height:auto;\"> ";
+                        }
+                        else if (i == 7) {
+                            document.getElementById("results8").innerHTML = "<img src=\"kd_logo.png\" align=\"middle\" alt=\"Logo KD\" style=\"width:80px;height:auto;\"> ";
+                        }
+                    }
+                }
+                if (stopfor == 1) {
+                    break;
+                }
+            }
+
+
+            answer();
+        }
+
+
+        function answer() {
+            for (var i = 0; i < userParty.length; i++) {
+                userParty[i] = userParty[i] / svarade * 100;
+                userParty[i] = Math.floor(userParty[i]);
+            }
+            showresults(); //Show results
+        }
+
+        function showresults() {
+            var width = screen.width;
+            var height = screen.height;
+            if (width > height) {
+                document.getElementById("results9").innerHTML = "<canvas id=\"myChart\" width=\"100\" height=\"50\"></canvas>"
+            }
+            else {
+                document.getElementById("results9").innerHTML = "<canvas id=\"myChart\" width=\"100\" height=\"100\"></canvas>"
+            }
+            
+            var hojd = document.body.scrollHeight;
+            generateGraph();
+            window.scrollTo(0, (document.body.scrollHeight-((document.body.scrollHeight-hojd))/0.6));
+        }
+
+        function Restart() {
+            location.reload(true);
+        }
+
+        function generateGraph() {
+            var ctx = document.getElementById("myChart");
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ["S", "M", "SD", "MP", "C", "V", "L", "KD"],
+                    datasets: [{
+                        label: 'Procent - %',
+                        data: userParty,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(0,0,255, 0.2)',
+                            'rgba(255,255,0, 0.2)',
+                            'rgba(0,128,0, 0.2)',
+                            'rgba(128,128,128, 0.2)',
+                            'rgba(255,0,0, 0.2)',
+                            'rgba(165,42,42,0.2)',
+                            'rgba(0,0,128,0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(0,0,255, 1)',
+                            'rgba(255,255,0, 1)',
+                            'rgba(0,128,0, 1)',
+                            'rgba(128,128,128, 1)',
+                            'rgba(255,0,0, 1)',
+                            'rgba(165,42,42,1)',
+                            'rgba(0,0,128,1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    },
+                    layout: {
+                        padding: 50
+                    }
+                 
+                }
+            });
+        }
+
+    </script>
+
+
+    <p id="results"></p>
+    <p id="results1"></p>
+    <p id="results2"></p>
+    <p id="results3"></p>
+    <p id="results4"></p>
+    <p id="results5"></p>
+    <p id="results6"></p>
+    <p id="results7"></p>
+    <p id="results8"></p>
+    <div id="results9"></div>
+
+    <p class="bottom-three"> </p>
+
+    <button style="margin-left:10%;" onclick="Restart()">Gör ett nytt test</button>
+
+    <p class="bottom-three"> </p>
+
+
+
+</body>
+</html>
