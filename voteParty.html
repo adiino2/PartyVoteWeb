@@ -163,7 +163,7 @@
                 	for (var j = 0; j < key.length; j++)
                     {
                     	if(key[j]*answers[i] > 0)
-                    		partyVote[j] += key[j];
+                    		partyVote[j] += Math.abs(key[j]);
                     }
                 }
                 console.log(takenIndexes);
