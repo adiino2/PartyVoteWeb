@@ -2,14 +2,15 @@
 <html>
 <head>
     
-    <script src="/Chart.js"></script>
-    <script src="/Chart.min.js"></script>
+    <script src="./Chart.js"></script>
+    <script src="./Chart.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     
 
     
 
-    <link rel="stylesheet" href="/StyleSheet.css" />
+    <link rel="stylesheet" href="StyleSheet.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,12 +20,16 @@
 </head>
 <body>
     <ul>
-        <li><a href="start.html">Hem</a></li>
+        <li><a href="index.html">Hem</a></li>
         <li><a href="omoss.html">Om oss</a></li>
-    </ul> 
+    </ul>
 
-    
-
+    <div id="contain"></div>
+    <div id="buttons">
+        <button data-val="1" class="choiceBtn">Ja</button>
+        <button data-val="0" class="choiceBtn">Avstår</button>
+        <button data-val="-1" class="choiceBtn">Nej</button>
+    </div>
     <script language="javascript">
 
         //------------------------------------
@@ -39,39 +44,40 @@
         //  Lägg till inläsning av keyArray och questionarray i headern
         //
         //--------------------------------------
-        
+
+        var qNum = 15;
 
         var questionArray = [
-            ["<h3>Det bör finnas aktiva åtgärder inom arbetslivet och utbildningsområdet som ska vara förebyggande och främjande för att motverka diskriminering. </h3><a href=\"https://www.riksdagen.se/sv/global/sok/?q=H301AU10&p=1\" target=\"_blank\">(Mer info)</a>", "Håller med", "Håller inte med", "Avstår"],
-            ["<h3>Arbetstagare som slår larm om allvarliga missförhållanden, så kallade visselblåsare, ska kunna göra det utan att drabbas av några straff från arbetsgivaren. </h3><a href=\"https://www.riksdagen.se/sv/global/sok/?q=H301AU11&p=1\" target=\"_blank\">(Mer info)</a>", "Håller med", "Håller inte med", "Avstår"],
-            ["<h3>Kommuner ska vara tvingade att ta emot nyanlända som har beviljats uppehållstillstånd. </h3><a href=\"https://www.riksdagen.se/sv/global/sok/?q=H301AU4&p=1\" target=\"_blank\">(Mer info)</a>", "Håller med", "Håller inte med", "Avstår"],
-            ["<h3>Arbetsgivares missbruk av tillfälliga anställningar, som exempelvis när en person får flera tidsbegränsade anställningar efter varandra hos samma arbetsgivare under lång tid bör vara olagligt </h3><a href=\"https://www.riksdagen.se/sv/global/sok/?q=H301AU5&p=1\" target=\"_blank\">(Mer info)</a>", "Håller med", "Håller inte med", "Avstår"],
-            ["<h3>Regeringen bör ha möjlighet att införa regler om tidsgränser för kommunernas handläggning av ärenden som inte kräver bygglov, marklov eller rivningslov. </h3><a href=\"https://www.riksdagen.se/sv/global/sok/?q=H301CU3&p=1\" target=\"_blank\">(Mer info)</a>", "Håller med", "Håller inte med", "Avstår"],
-            ["<h3>Regeringen borde arbeta hårdare för att utveckla valfriheten inom skolan, sjukvården och äldreomsorgen. </h3><a href=\"https://www.riksdagen.se/sv/global/sok/?q=H301FiU26&p=1\" target=\"_blank\">(Mer info)</a>", "Håller med", "Håller inte med", "Avstår"],
-            ["<h3>Vid en överprövning av offentlig upphandling bör domstolarna alltid ska ta hänsyn till användarnas intresse, allmänintresset och övriga berörda intressen. </h3><a href=\"https://www.riksdagen.se/sv/global/sok/?q=H301FiU29&p=1\" target=\"_blank\">(Mer info)</a>", "Håller med", "Håller inte med", "Avstår"],
-            ["<h3>Riksbanken ska få ingå avtal om lån till Internationella valutafonden, IMF, för utlåning till låginkomstländer. </h3><a href=\"https://www.riksdagen.se/sv/global/sok/?q=H301FiU40&p=1\" target=\"_blank\">(Mer info)</a>", "Håller med", "Håller inte med", "Avstår"],
-            ["<h3>Regeringen ska ha makt att besluta om att sända väpnad styrka utomlands för övning och annan utbildning även om det inte har ett fredsfrämjande syfte. </h3><a href=\"https://www.riksdagen.se/sv/global/sok/?q=H301F\u00f6U14&p=1\" target=\"_blank\">(Mer info)</a>", "Håller med", "Håller inte med", "Avstår"],
-            ["<h3>Efter terrordåden i Frankrike den 13 november 2015 begärdes stöd från övriga EU-länder i kampen mot terrororganisationen Daish. Sverige bör lämna stöd till Frankrike i form av den ammunition som efterfrågas. </h3><a href=\"https://www.riksdagen.se/sv/global/sok/?q=H301F\u00f6U15&p=1\" target=\"_blank\">(Mer info)</a>", "Håller med", "Håller inte med", "Avstår"],
-            ["<h3>Det bör vara möjligt att återkalla eller tillfälligt dra in passet för den som är misstänkt för att förbereda eller ha påbörjat en resa i terrorismsyfte utan domstolsbeslut. </h3><a href=\"https://www.riksdagen.se/sv/global/sok/?q=H301JuU17&p=1\" target=\"_blank\">(Mer info)</a>", "Håller med", "Håller inte med", "Avstår"],
-            ["<h3>Den som sitter i fängelse för våldsbrott bör vara tvungen att gå ett behandlingsprogram. </h3><a href=\"https://www.riksdagen.se/sv/global/sok/?q=H301JuU21&p=1\" target=\"_blank\">(Mer info)</a>", "Håller med", "Håller inte med", "Avstår"],
-            ["<h3>Id-kontroller ska kunna införas på bussar, båtar och tåg som transporterar passagerare till Sverige. </h3><a href=\"https://www.riksdagen.se/sv/global/sok/?q=H301JuU24&p=1\" target=\"_blank\">(Mer info)</a>", "Håller med", "Håller inte med", "Avstår"],
-            ["<h3>Sverige och USA bör ge varandra direktåtkomst sina nationella fingeravtrycksregister. </h3><a href=\"https://www.riksdagen.se/sv/global/sok/?q=H301JuU33&p=1\" target=\"_blank\">(Mer info)</a>", "Håller med", "Håller inte med", "Avstår"],
-            ["<h3>Regeringen bör ta hänsyn till det positiva sambandet mellan kultur och hälsa i sin utformning av kulturpolitiken. </h3><a href=\"https://www.riksdagen.se/sv/global/sok/?q=H301KrU10&p=1\" target=\"_blank\">(Mer info)</a>", "Håller med", "Håller inte med", "Avstår"],
-            ["<h3>Anställda på privata skolor, sjukhus och äldreboenden borde ha samma meddelarskydd som offentligt anställd personal om verksamheten finansieras med skattemedel. </h3><a href=\"https://www.riksdagen.se/sv/global/sok/?q=H301KU18&p=1\" target=\"_blank\">(Mer info)</a>", "Håller med", "Håller inte med", "Avstår"],
-            ["<h3>Metallföremål som inte förbränts vid kremering och som skilts från askan bör återvinnas genom materialåtervinning. </h3><a href=\"https://www.riksdagen.se/sv/global/sok/?q=H301KU24&p=1\" target=\"_blank\">(Mer info)</a>", "Håller med", "Håller inte med", "Avstår"],
-            ["<h3>Statens riskkapitalinsatser bör utnyttjas bättre samt bidra till att utveckla och förnya det svenska näringslivet. </h3><a href=\"https://www.riksdagen.se/sv/global/sok/?q=H301NU23&p=1\" target=\"_blank\">(Mer info)</a>", "Håller med", "Håller inte med", "Avstår"],
-            ["<h3>Andelen förnybar el i det svenska energisystemet bör öka. </h3><a href=\"https://www.riksdagen.se/sv/global/sok/?q=H301NU6&p=1\" target=\"_blank\">(Mer info)</a>", "Håller med", "Håller inte med", "Avstår"],
-            ["<h3>Sverige bör tillfälligt införa tidsbegränsade uppehållstillstånd (2016/06). Rätten till anhöriginvandring bör begränsas och försörjningskraven skärpas. </h3><a href=\"https://www.riksdagen.se/sv/global/sok/?q=H301SfU16&p=1\" target=\"_blank\">(Mer info)</a>", "Håller med", "Håller inte med", "Avstår"],
-            ["<h3>Antalet dagar med föräldrapenning som är reserverade för en förälder och inte kan avstås till den andra föräldern, bör öka från 60 till 90 dagar. </h3><a href=\"https://www.riksdagen.se/sv/global/sok/?q=H301SfU5&p=1\" target=\"_blank\">(Mer info)</a>", "Håller med", "Håller inte med", "Avstår"],
-            ["<h3>Det kommunala vårdnadsbidraget bör avskaffas. </h3><a href=\"https://www.riksdagen.se/sv/global/sok/?q=H301SfU8&p=1\" target=\"_blank\">(Mer info)</a>", "Håller med", "Håller inte med", "Avstår"],
-            ["<h3>En person som har lämnat en felaktig uppgift vid deklarationen och fått skattetillägg som straff bör inte efteråt kunna åtalas för skattebrott för samma felaktighet. Även det omvända bör gälla. </h3><a href=\"https://www.riksdagen.se/sv/global/sok/?q=H301SkU4&p=1\" target=\"_blank\">(Mer info)</a>", "Håller med", "Håller inte med", "Avstår"],
-            ["<h3>Nya skatteregler bör införs som ska motverka att företag kan utnyttja olikheter i länders skattesystem för att slippa att betala skatt. </h3><a href=\"https://www.riksdagen.se/sv/global/sok/?q=H301SkU7&p=1\" target=\"_blank\">(Mer info)</a>", "Håller med", "Håller inte med", "Avstår"],
-            ["<h3>Staten ska betala ersättning till dem som drabbades av narkolepsi efter vaccineringen mot svininfluensan. </h3><a href=\"https://www.riksdagen.se/sv/global/sok/?q=H301SoU16&p=1\" target=\"_blank\">(Mer info)</a>", "Håller med", "Håller inte med", "Avstår"],
-            ["<h3>Ensamstående kvinnor bör ges samma möjlighet till assisterad befruktning inom svensk hälso- och sjukvård som gifta par, registrerade partner och sambor. </h3><a href=\"https://www.riksdagen.se/sv/global/sok/?q=H301SoU3&p=1\" target=\"_blank\">(Mer info)</a>", "Håller med", "Håller inte med", "Avstår"],
-            ["<h3>Landstingen bör lämna bidrag för glasögon eller kontaktlinser till vissa barn och unga mellan 8 och 19 år. </h3><a href=\"https://www.riksdagen.se/sv/global/sok/?q=H301SoU4&p=1\" target=\"_blank\">(Mer info)</a>", "Håller med", "Håller inte med", "Avstår"],
-            ["<h3>Regeringen borde jobba för att biodrivmedel oftare ska användas i luftfarten som flygbränsle. </h3><a href=\"https://www.riksdagen.se/sv/global/sok/?q=H301TU9&p=1\" target=\"_blank\">(Mer info)</a>", "Håller med", "Håller inte med", "Avstår"],
-            ["<h3>Modersmålsundervisning och studiehandledning på modersmål i grundskolan, grundsärskolan, gymnasieskolan och gymnasiesärskolan bör få överlämnas på entreprenad till en annan skolhuvudman. </h3><a href=\"https://www.riksdagen.se/sv/global/sok/?q=H301UbU18&p=1\" target=\"_blank\">(Mer info)</a>", "Håller med", "Håller inte med", "Avstår"],
-            ["<h3>Sverige bör under 2016 delta i Natos utbildnings- och rådgivningsinsats i Afghanistan. </h3><a href=\"https://www.riksdagen.se/sv/global/sok/?q=H301UF\u00f6U1&p=1\" target=\"_blank\">(Mer info)</a>", "Håller med", "Håller inte med", "Avstår"]
+            ["Det bör finnas aktiva åtgärder inom arbetslivet och utbildningsområdet som ska vara förebyggande och främjande för att motverka diskriminering. "],
+            ["Arbetstagare som slår larm om allvarliga missförhållanden, så kallade visselblåsare, ska kunna göra det utan att drabbas av några straff från arbetsgivaren. "],
+            ["Kommuner ska vara tvingade att ta emot nyanlända som har beviljats uppehållstillstånd. "],
+            ["Arbetsgivares missbruk av tillfälliga anställningar, som exempelvis när en person får flera tidsbegränsade anställningar efter varandra hos samma arbetsgivare under lång tid bör vara olagligt "],
+            ["Regeringen bör ha möjlighet att införa regler om tidsgränser för kommunernas handläggning av ärenden som inte kräver bygglov, marklov eller rivningslov. "],
+            ["Regeringen borde arbeta hårdare för att utveckla valfriheten inom skolan, sjukvården och äldreomsorgen. "],
+            ["Vid en överprövning av offentlig upphandling bör domstolarna alltid ska ta hänsyn till användarnas intresse, allmänintresset och övriga berörda intressen."],
+            ["Riksbanken ska få ingå avtal om lån till Internationella valutafonden, IMF, för utlåning till låginkomstländer. "],
+            ["Regeringen ska ha makt att besluta om att sända väpnad styrka utomlands för övning och annan utbildning även om det inte har ett fredsfrämjande syfte. "],
+            ["Efter terrordåden i Frankrike den 13 november 2015 begärdes stöd från övriga EU-länder i kampen mot terrororganisationen Daish. Sverige bör lämna stöd till Frankrike i form av den ammunition som efterfrågas. "] ,
+            ["Det bör vara möjligt att återkalla eller tillfälligt dra in passet för den som är misstänkt för att förbereda eller ha påbörjat en resa i terrorismsyfte utan domstolsbeslut. "] ,
+            ["Den som sitter i fängelse för våldsbrott bör vara tvungen att gå ett behandlingsprogram. "] ,
+            ["Id-kontroller ska kunna införas på bussar, båtar och tåg som transporterar passagerare till Sverige. "] ,
+            ["Sverige och USA bör ge varandra direktåtkomst sina nationella fingeravtrycksregister. "] ,
+            ["Regeringen bör ta hänsyn till det positiva sambandet mellan kultur och hälsa i sin utformning av kulturpolitiken. "] ,
+            ["Anställda på privata skolor, sjukhus och äldreboenden borde ha samma meddelarskydd som offentligt anställd personal om verksamheten finansieras med skattemedel. "] ,
+            ["Metallföremål som inte förbränts vid kremering och som skilts från askan bör återvinnas genom materialåtervinning. "] ,
+            ["Statens riskkapitalinsatser bör utnyttjas bättre samt bidra till att utveckla och förnya det svenska näringslivet. "] ,
+            ["Andelen förnybar el i det svenska energisystemet bör öka. "] ,
+            ["Sverige bör tillfälligt införa tidsbegränsade uppehållstillstånd (2016/06). Rätten till anhöriginvandring bör begränsas och försörjningskraven skärpas. "] ,
+            ["Antalet dagar med föräldrapenning som är reserverade för en förälder och inte kan avstås till den andra föräldern, bör öka från 60 till 90 dagar. "] ,
+            ["Det kommunala vårdnadsbidraget bör avskaffas. "] ,
+            ["En person som har lämnat en felaktig uppgift vid deklarationen och fått skattetillägg som straff bör inte efteråt kunna åtalas för skattebrott för samma felaktighet. Även det omvända bör gälla. "] ,
+            ["Nya skatteregler bör införs som ska motverka att företag kan utnyttja olikheter i länders skattesystem för att slippa att betala skatt. "] ,
+            ["Staten ska betala ersättning till dem som drabbades av narkolepsi efter vaccineringen mot svininfluensan. "] ,
+            ["Ensamstående kvinnor bör ges samma möjlighet till assisterad befruktning inom svensk hälso- och sjukvård som gifta par, registrerade partner och sambor. "] ,
+            ["Landstingen bör lämna bidrag för glasögon eller kontaktlinser till vissa barn och unga mellan 8 och 19 år. "] ,
+            ["Regeringen borde jobba för att biodrivmedel oftare ska användas i luftfarten som flygbränsle. "] ,
+            ["Modersmålsundervisning och studiehandledning på modersmål i grundskolan, grundsärskolan, gymnasieskolan och gymnasiesärskolan bör få överlämnas på entreprenad till en annan skolhuvudman. "] ,
+            ["Sverige bör under 2016 delta i Natos utbildnings- och rådgivningsinsats i Afghanistan. "]
         ];
 
         var keyArray = [
@@ -107,14 +113,126 @@
             [0.929204, 0.940476, -0.958333, 0.960000, 0.909091, -0.809524, 0.736842, 0.875000]
         ];
 
+        var takenIndexes =  [];
 
+        var answers = [];
 
+        var $contain = $("#contain");
+        var $buttons = $("#buttons");
 
+        /**
+        * Returns [newQuestion, newKey] from quetionArray and keyArray. To be replaced by modular JSON reader.
+        **/
+        function getNewQuestion()
+        {
+        	if(!(takenIndexes.length == questionArray.length))
+                while(1)
+                {
+                    var rand = Math.floor(Math.random() * questionArray.length);
+                    var go = true;
+                    for (var i in takenIndexes)
+                    {
+                        if(rand == i)
+                            go = false;
+                    }
+                    if(go)
+                    {
+                        takenIndexes.push(rand);
+                        return questionArray[rand];
+                    }
+                }
+        }
 
-        var previousQ = [];
+        $(".choiceBtn").click(function ()
+        {
+            if(takenIndexes.length < qNum)
+            {
+            	answers.push(parseInt(this.dataset.val));
+                var q = getNewQuestion();
+                $contain.empty().append("<h3>" +q + "</h3>");
+            }
+            else
+            {
+            	$buttons.hide();
+	            var $canvas = $("<canvas/>");
+	            $contain.empty().append($canvas);
+                var partyVote = [0,0,0,0,0,0,0,0];
+                for (var i = 0; i < qNum; i++)
+                {
+                	var key = keyArray[takenIndexes[i]];
+                	for (var j = 0; j < key.length; j++)
+                    {
+                    	if(key[j]*answers[i] > 0)
+                    		partyVote[j] += key[j];
+                    }
+                }
+                console.log(takenIndexes);
+                console.log(partyVote);
+                for (var i = 0; i < partyVote.length; i++)
+                {
+                	console.log(partyVote[i]);
+                	partyVote[i] = (partyVote[i]/qNum) * 100;
+                }
+                console.log(partyVote);
+	            var myChart = new Chart($canvas[0], {
+		            type: 'bar',
+		            data: {
+			            labels: ["S", "M", "SD", "MP", "C", "V", "L", "KD"],
+			            datasets: [{
+				            label: 'Procent - %',
+				            data: partyVote,
+				            backgroundColor: [
+					            'rgba(255, 99, 132, 0.2)',
+					            'rgba(0,0,255, 0.2)',
+					            'rgba(255,255,0, 0.2)',
+					            'rgba(0,128,0, 0.2)',
+					            'rgba(128,128,128, 0.2)',
+					            'rgba(255,0,0, 0.2)',
+					            'rgba(165,42,42,0.2)',
+					            'rgba(0,0,128,0.2)'
+				            ],
+				            borderColor: [
+					            'rgba(255, 99, 132, 1)',
+					            'rgba(0,0,255, 1)',
+					            'rgba(255,255,0, 1)',
+					            'rgba(0,128,0, 1)',
+					            'rgba(128,128,128, 1)',
+					            'rgba(255,0,0, 1)',
+					            'rgba(165,42,42,1)',
+					            'rgba(0,0,128,1)'
+				            ],
+				            borderWidth: 1
+			            }]
+		            },
+		            options: {
+			            scales: {
+				            yAxes: [{
+					            ticks: {
+						            beginAtZero: true
+					            }
+				            }]
+			            },
+			            layout: {
+				            padding: 50
+			            }
+
+		            }
+	            });
+
+            }
+        });
+
+        $(document).ready(function ()
+        {
+            var q = getNewQuestion();
+            $contain.append("<h3>" +q + "</h3>");
+        });
+
+/*        var previousQ = [];
         var nrofQ = 15;   //ANTAL FRÅGOR 
         //Skriv ut frågor -> 
-        for (var i = 0; i < nrofQ; i++) {
+        for (var i = 0; i < nrofQ; i++)
+        {
             var slumptal;
             //Slumpa fram olika frågor.
             slumptal = Math.floor((Math.random() * questionArray.length)); //Random 0-length of array
@@ -136,7 +254,8 @@
 
         //Lyssna efter klick
         var inputs = document.getElementsByTagName('input');
-        for (var i = 0; i < inputs.length; i++) {
+        for (var i = 0; i < inputs.length; i++)
+        {
             inputs[i].addEventListener('click', check);
         }
 
@@ -145,7 +264,8 @@
         var userAnswers = [];
 
         //Se vad personen svarat
-        function check() {
+        function check()
+        {
 
             userAnswers = [];
             var c = 0;
@@ -313,7 +433,7 @@
                  
                 }
             });
-        }
+        }*/
 
     </script>
 
