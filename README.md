@@ -1,3 +1,4 @@
 # PartyVoteWeb
 
-Notera att den blir felformatterad
+Ongoing project
+https://adiino2.github.io/PartyVoteWeb/
