@@ -130,11 +130,8 @@
                 {
                     var rand = Math.floor(Math.random() * questionArray.length);
                     var go = true;
-                    for (var i in takenIndexes)
-                    {
-                        if(rand == i)
-                            go = false;
-                    }
+		    if(takenIndexes.indexOf(rand) != -1)
+		    	go = false;
                     if(go)
                     {
                         takenIndexes.push(rand);
