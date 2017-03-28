@@ -130,9 +130,10 @@
                 {
                     var rand = Math.floor(Math.random() * questionArray.length);
                     var go = true;
-		    if(takenIndexes.indexOf(rand) != -1)
-			    console.log(takenIndexes.indexOf(rand) != -1);
+		    if(takenIndexes.indexOf(rand) != -1) {
+		    	console.log(takenIndexes.indexOf(rand) != -1);
 		    	go = false;
+		    }
                     if(go)
                     {
                         takenIndexes.push(rand);
