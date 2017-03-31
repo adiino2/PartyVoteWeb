@@ -148,7 +148,7 @@
 
         $(".choiceBtn").click(function ()
         {
-            if(takenIndexes.length < qNum)
+            if(takenIndexes.length < qNum+1)
             {
             	answers.push(parseInt(this.dataset.val));
                 var q = getNewQuestion();
