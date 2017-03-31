@@ -122,6 +122,7 @@
         var $contain = $("#contain");
         var $buttons = $("#buttons");
 	var $nr = $("#nr");
+	var $moreq = $("moreq");
 
         /**
         * Returns [newQuestion, newKey] from quetionArray and keyArray. To be replaced by modular JSON reader.
@@ -155,12 +156,6 @@
 		$nr.empty().append("Fråga: ");
 		$nr.append(answers.length+1 + "/15");
                 $contain.empty().append("<h3>" +q + "</h3>");
-		
-		if(answers[answers.length - 1] != 0) {
-			nrAns++;
-			console.log("PING");
-		}
-		    
             }
             else
             {
@@ -172,7 +167,11 @@
                 var partyVote = [0,0,0,0,0,0,0,0];
                 for (var i = 0; i < qNum; i++)
                 {
-                	var key = keyArray[takenIndexes[i]];			
+                	var key = keyArray[takenIndexes[i]];
+			
+			if(answers[i] != 0) {
+				nrAns++;
+			}
 			
                 	for (var j = 0; j < key.length; j++)
                     {
@@ -245,6 +244,10 @@
 	    
 	function Restart() {
             location.reload(true);
+	}
+	    
+	function moreq() {
+		qNum = qNum + 5;
 	}
 
 /*
@@ -367,6 +370,10 @@
     <p class="bottom-three"> </p>
 
     <button style="margin-left:10%;" onclick="Restart()">Gör ett nytt test</button>
+	
+	<div id="moreq">
+		<button style="margin-left:5%;" onclick="moreq()">Lägg till mer frågor</button>
+	</div>
 
     <p class="bottom-three"> </p>
 
