@@ -152,12 +152,13 @@
             {
             	answers.push(parseInt(this.dataset.val));
                 var q = getNewQuestion();
+		$nr.empty().append(answers.length+1 + "/15");
                 $contain.empty().append("<h3>" +q + "</h3>");
-		$nr.empty().append("NUMMER");
             }
             else
             {
             	$buttons.hide();
+		    $nr.hide();
 	            var $canvas = $("<canvas/>");
 	            $contain.empty().append($canvas);
                 var partyVote = [0,0,0,0,0,0,0,0];
@@ -234,87 +235,15 @@
         $(document).ready(function ()
         {
             var q = getNewQuestion();
+	    $nr.append("1/12");
             $contain.append("<h3>" +q + "</h3>");
         });
+	    
+	function Restart() {
+            location.reload(true);
+	}
 
-/*        var previousQ = [];
-        var nrofQ = 15;   //ANTAL FRÅGOR 
-        //Skriv ut frågor -> 
-        for (var i = 0; i < nrofQ; i++)
-        {
-            var slumptal;
-            //Slumpa fram olika frågor.
-            slumptal = Math.floor((Math.random() * questionArray.length)); //Random 0-length of array
-            
-            while (previousQ.indexOf(slumptal) > -1) {
-                slumptal = Math.floor((Math.random() * nrofQ));
-            }
-
-            previousQ[i] = slumptal;
-
-            document.write("<center><form><span class='question'>" + questionArray[slumptal][0] + "</span><br>");
-            for (var x = 1; x < 4; x++) {
-                document.write("<input type='radio' class='answer' name='answer' value='" + questionArray[slumptal][x] + "'>" + questionArray[slumptal][x] + "");
-
-            }
-            document.write("</form></center><br>");
-        }
-
-
-        //Lyssna efter klick
-        var inputs = document.getElementsByTagName('input');
-        for (var i = 0; i < inputs.length; i++)
-        {
-            inputs[i].addEventListener('click', check);
-        }
-
-
-
-        var userAnswers = [];
-
-        //Se vad personen svarat
-        function check()
-        {
-
-            userAnswers = [];
-            var c = 0;
-            for (var i = 0; i < inputs.length; i++) {
-                if (inputs[i].checked) {
-                    userAnswers.push(i % 3);
-                    c++;
-                }
-            }
-            if (c == nrofQ) rate();
-        }
-
-
-        var userParty = [0, 0, 0, 0, 0, 0, 0, 0]; //Antal som överränsstämmer med parti
-        var svarade = 0; //Antal frågor som personen svarade ja eller nej på
-        //Summera svaren
-        function rate() {
-            userParty = [0, 0, 0, 0, 0, 0, 0, 0];
-            svarade = 0;
-            console.log(userAnswers);
-            for (var i = 0; i < userAnswers.length; i++) {
-                if (userAnswers[i] == '0') {
-                    svarade = svarade + 1;
-                    for (var j = 0; j < 8; j++) { //8 is the number of parties
-                        if (keyArray[previousQ[i]][j] > 0) {
-                            userParty[j] = userParty[j] + keyArray[previousQ[i]][j];
-                        }
-                    }
-                }
-                else if (userAnswers[i] == '1') {
-                    svarade = svarade + 1;
-                    for (var j = 0; j < 8; j++) { //8 = nr of parties
-                        if (keyArray[previousQ[i]][j] < 0) {
-                            userParty[j] = userParty[j] - keyArray[previousQ[i]][j];
-                        }
-                    }
-                }
-            }
-            console.log(userParty);
-
+/*
             //Visa det populäraste partiet
             document.getElementById("results").innerHTML = "<center><h2> Du röstar som: </h2></center> <br>";
             document.getElementById("results1").innerHTML = "";
@@ -365,36 +294,9 @@
             }
 
 
-            answer();
-        }
 
 
-        function answer() {
-            for (var i = 0; i < userParty.length; i++) {
-                userParty[i] = userParty[i] / svarade * 100;
-                userParty[i] = Math.floor(userParty[i]);
-            }
-            showresults(); //Show results
-        }
 
-        function showresults() {
-            var width = screen.width;
-            var height = screen.height;
-            if (width > height) {
-                document.getElementById("results9").innerHTML = "<canvas id=\"myChart\" width=\"100\" height=\"50\"></canvas>"
-            }
-            else {
-                document.getElementById("results9").innerHTML = "<canvas id=\"myChart\" width=\"100\" height=\"100\"></canvas>"
-            }
-            
-            var hojd = document.body.scrollHeight;
-            generateGraph();
-            window.scrollTo(0, (document.body.scrollHeight-((document.body.scrollHeight-hojd))/0.6));
-        }
-
-        function Restart() {
-            location.reload(true);
-        }
 
         function generateGraph() {
             var ctx = document.getElementById("myChart");
