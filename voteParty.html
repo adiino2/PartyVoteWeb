@@ -152,7 +152,8 @@
             {
             	answers.push(parseInt(this.dataset.val));
                 var q = getNewQuestion();
-		$nr.empty().append("Fråga: " + answers.length+1 + "/15");
+		$nr.empty.append("Fråga: ");
+		$nr.append(answers.length+1 + "/15");
                 $contain.empty().append("<h3>" +q + "</h3>");
             }
             else
@@ -181,7 +182,7 @@
                 for (var i = 0; i < partyVote.length; i++)
                 {
                 	console.log(partyVote[i]);
-			console.log(nrAns);
+			console.log("NRANS = " + nrAns);
                 	partyVote[i] = Math.round((partyVote[i]/nrAns) * 10000)/100;
                 }
                 console.log(partyVote);
