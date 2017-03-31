@@ -32,6 +32,7 @@
     </center></div>
     <div id="picture"></div>
     <div id="contain"></div>
+    <center><h5><div id="link"></div></h5></center>
     <div id="buttons">
         <button data-val="1" class="choiceBtn">Ja</button>
         <button data-val="0" class="choiceBtn">Avstår</button>
@@ -87,6 +88,39 @@
             ["Sverige bör under 2016 delta i Natos utbildnings- och rådgivningsinsats i Afghanistan. "]
         ];
 
+        var link = [
+            ["H301AU10"],
+            ["H301AU11"],
+            ["H301AU4"],
+            ["H301AU5"],
+            ["H301CU3"],
+            ["H301FiU26"],
+            ["H301FiU29"],
+            ["H301FiU40"],
+            ["H301F\u00f6U14"],
+            ["H301F\u00f6U15"],
+            ["H301JuU17"],
+            ["H301JuU21"],
+            ["H301JuU24"],
+            ["H301JuU33"],
+            ["H301KrU10"],
+            ["H301KU18"],
+            ["H301KU24"],
+            ["H301NU23"],
+            ["H301NU6"],
+            ["H301SfU16"],
+            ["H301SfU5"],
+            ["H301SfU8"],
+            ["H301SkU4"],
+            ["H301SkU7"],
+            ["H301SoU16"],
+            ["H301SoU3"],
+            ["H301SoU4"],
+            ["H301TU9"],
+            ["H301UbU18"],
+            ["H301UF\u00f6U1"]
+        ];
+
         var keyArray = [
             [0.938053, -0.916667, 0.000000, 0.840000, -0.954545, 0.904762, 0.842105, -0.875000],
             [0.884956, 0.880952, 0.770833, 1.000000, 0.863636, 0.857143, -0.894737, 0.937500],
@@ -130,6 +164,7 @@
 	    var $nr = $("#nr");
 	    var $moreq = $("#moreq");
 	    var $picture = $("#picture");
+	    var $link = $("#link");
 
         /**
         * Returns [newQuestion, newKey] from quetionArray and keyArray. To be replaced by modular JSON reader.
@@ -169,13 +204,15 @@
 		        $nr.empty().append("Fråga: ");
 		        $nr.append(answers.length+1 + "/");
 		        $nr.append(qNum);
+                $link.empty().append("<a href=\"https://www.riksdagen.se/sv/global/sok/?q=" + link[questionArray.indexOf(q)] + "&p=1\" target=\"_blank\">(Mer info)</a>");
                 $contain.empty().append("<h3>" +q + "</h3>");
             }
             else
             {
 		        answers.push(parseInt(this.dataset.val));
             	$buttons.hide();
-		        $nr.hide();
+            	$nr.hide();
+            	$link.hide();
 		        if(screen.width > screen.height) {
 	            	var $canvas = $("<canvas/>");
 		        }
@@ -294,11 +331,13 @@
         $(document).ready(function ()
         {
             $moreq.hide();
+            $link.show();
             $picture.hide();
             var q = getNewQuestion();
 		    $nr.empty().append("Fråga: ");
 		    $nr.append("1/");
 		    $nr.append(qNum);
+		    $link.empty().append("<a href=\"https://www.riksdagen.se/sv/global/sok/?q=" + link[questionArray.indexOf(q)] + "&p=1\" target=\"_blank\">(Mer info)</a>");
             $contain.append("<h3>" +q + "</h3>");
         });
 	    
@@ -309,6 +348,7 @@
 
 	function contQuestions() { /*The user get the opportunity to continue answering questions */
 	    $contain.empty();
+	    $link.show();
 	    $buttons.show();
 	    $nr.show();
 	    $moreq.hide();
@@ -318,6 +358,7 @@
 	    $nr.empty().append("Fråga: ");
 	    $nr.append(answers.length + 1 + "/");
 	    $nr.append(qNum);
+	    $link.empty().append("<a href=\"https://www.riksdagen.se/sv/global/sok/?q=" + link[questionArray.indexOf(q)] + "&p=1\" target=\"_blank\">(Mer info)</a>");
 	    $contain.append("<h3>" + q + "</h3>");
 	}
 
