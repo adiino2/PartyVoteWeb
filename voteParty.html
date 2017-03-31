@@ -210,6 +210,7 @@
 
                 var xx = 0;
                 $picture.show();
+                $picture.empty();
                 for (var i = 0; i < 8; i++) { //Kolla alla partier
                     if (partyVote.indexOf(Math.max.apply(Math, partyVote), xx) == i) {
                         xx = i + 1;
