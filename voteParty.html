@@ -154,11 +154,13 @@
             	answers.push(parseInt(this.dataset.val));
                 var q = getNewQuestion();
 		$nr.empty().append("Fråga: ");
-		$nr.append(answers.length+1 + "/15");
+		$nr.append(answers.length+1 + "/");
+		$nr.append(qNum);
                 $contain.empty().append("<h3>" +q + "</h3>");
             }
             else
             {
+		    $moreq.hide();
 		    answers.push(parseInt(this.dataset.val));
             	$buttons.hide();
 		    $nr.hide();
@@ -238,7 +240,9 @@
         $(document).ready(function ()
         {
             var q = getNewQuestion();
-	    $nr.append("Fråga 1/15");
+		$nr.empty().append("Fråga: ");
+		$nr.append("1/");
+		$nr.append(qNum);
             $contain.append("<h3>" +q + "</h3>");
         });
 	    
@@ -372,7 +376,7 @@
     <button style="margin-left:10%;" onclick="Restart()">Gör ett nytt test</button>
 	
 	<div id="moreq">
-		<button style="margin-left:5%;" onclick="moreq()">Lägg till mer frågor</button>
+		<button style="margin-right:5%;" onclick="moreq()">Lägg till mer frågor</button>
 	</div>
 
     <p class="bottom-three"> </p>
