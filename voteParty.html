@@ -152,7 +152,7 @@
             {
             	answers.push(parseInt(this.dataset.val));
                 var q = getNewQuestion();
-		$nr.empty().append(answers.length+1 + "/15");
+		$nr.empty().append("Fråga: " + answers.length+1 + "/15");
                 $contain.empty().append("<h3>" +q + "</h3>");
             }
             else
@@ -181,6 +181,7 @@
                 for (var i = 0; i < partyVote.length; i++)
                 {
                 	console.log(partyVote[i]);
+			console.log(nrAns);
                 	partyVote[i] = Math.round((partyVote[i]/nrAns) * 10000)/100;
                 }
                 console.log(partyVote);
@@ -235,7 +236,7 @@
         $(document).ready(function ()
         {
             var q = getNewQuestion();
-	    $nr.append("1/12");
+	    $nr.append("Fråga 1/15");
             $contain.append("<h3>" +q + "</h3>");
         });
 	    
