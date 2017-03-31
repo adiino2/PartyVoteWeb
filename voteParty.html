@@ -30,6 +30,7 @@
     <button onclick="contQuestions()">Lägg till mer frågor</button>
         <h3>Du röstar som:</h3>
     </center></div>
+    <div id="picture"></div>
     <div id="contain"></div>
     <div id="buttons">
         <button data-val="1" class="choiceBtn">Ja</button>
@@ -128,6 +129,7 @@
         var $buttons = $("#buttons");
 	    var $nr = $("#nr");
 	    var $moreq = $("#moreq");
+	    var $picture = $("#picture");
 
         /**
         * Returns [newQuestion, newKey] from quetionArray and keyArray. To be replaced by modular JSON reader.
@@ -204,6 +206,40 @@
                 	
                 	partyVote[i] = Math.round((partyVote[i]/nrAns) * 10000)/100;
                 }
+
+
+                var xx = 0;
+                $picture.show();
+                for (var i = 0; i < 8; i++) { //Kolla alla partier
+                    if (partyVote.indexOf(Math.max.apply(Math, partyVote), xx) == i) {
+                        xx = i + 1;
+                        stopfor = 1;
+                        if (i == 0) {
+                            $picture.append("<img src=\"partyLogo\\s_logo.png\" align=\"middle\" alt=\"Logo S\" style=\"width:80px;height:auto;\"> ");
+                        }
+                        else if (i == 1) {
+                            $picture.append("<img src=\"partyLogo\\m_logo.png\" align=\"middle\" alt=\"Logo M\" style=\"width:80px;height:auto;\"> ");
+                        }
+                        else if (i == 2) {
+                            $picture.append("<img src=\"partyLogo\\sd_logo.png\" align=\"middle\" alt=\"Logo SD\" style=\"width:80px;height:auto;\"> ");
+                        }
+                        else if (i == 3) {
+                            $picture.append("<img src=\"partyLogo\\mp_logo.png\" align=\"middle\" alt=\"Logo MP\" style=\"width:80px;height:auto;\"> ");
+                        }
+                        else if (i == 4) {
+                            $picture.append("<img src=\"partyLogo\\c_logo.png\" align=\"middle\" alt=\"Logo C\" style=\"width:80px;height:auto;\"> ");
+                        }
+                        else if (i == 5) {
+                            $picture.append("<img src=\"partyLogo\\v_logo.png\" align=\"middle\" alt=\"Logo V\" style=\"width:80px;height:auto;\"> ");
+                        }
+                        else if (i == 6) {
+                            $picture.append("<img src=\"partyLogo\\l_logo.png\" align=\"middle\" alt=\"Logo L\" style=\"width:80px;height:auto;\"> ");
+                        }
+                        else if (i == 7) {
+                            $picture.append("<img src=\"partyLogo\\kd_logo.png\" align=\"middle\" alt=\"Logo KD\" style=\"width:80px;height:auto;\"> ");
+                        }
+                    }
+                }
                 
                
 	            var myChart = new Chart($canvas[0], {
@@ -257,6 +293,7 @@
         $(document).ready(function ()
         {
             $moreq.hide();
+            $picture.hide();
             var q = getNewQuestion();
 		    $nr.empty().append("Fråga: ");
 		    $nr.append("1/");
@@ -274,6 +311,7 @@
 	    $buttons.show();
 	    $nr.show();
 	    $moreq.hide();
+	    $picture.hide();
 	    qNum = qNum + 5;
 	    var q = getNewQuestion();
 	    $nr.empty().append("Fråga: ");
