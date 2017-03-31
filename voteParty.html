@@ -152,7 +152,7 @@
             {
             	answers.push(parseInt(this.dataset.val));
                 var q = getNewQuestion();
-		$nr.empty.append("Fråga: ");
+		$nr.empty().append("Fråga: ");
 		$nr.append(answers.length+1 + "/15");
                 $contain.empty().append("<h3>" +q + "</h3>");
             }
