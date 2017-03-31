@@ -155,6 +155,12 @@
 		$nr.empty().append("Fråga: ");
 		$nr.append(answers.length+1 + "/15");
                 $contain.empty().append("<h3>" +q + "</h3>");
+		
+		if(answers[answers.length - 1] != 0) {
+			nrAns++;
+			console.log("PING");
+		}
+		    
             }
             else
             {
@@ -165,11 +171,7 @@
                 var partyVote = [0,0,0,0,0,0,0,0];
                 for (var i = 0; i < qNum; i++)
                 {
-                	var key = keyArray[takenIndexes[i]];
-			
-			if(answers[i] != 0) {
-				nrAns++;
-			}
+                	var key = keyArray[takenIndexes[i]];			
 			
                 	for (var j = 0; j < key.length; j++)
                     {
@@ -181,8 +183,7 @@
                 console.log(partyVote);
                 for (var i = 0; i < partyVote.length; i++)
                 {
-                	console.log(partyVote[i]);
-			console.log("NRANS = " + nrAns);
+                	console.log("nrANS = " + nrAns);
                 	partyVote[i] = Math.round((partyVote[i]/nrAns) * 10000)/100;
                 }
                 console.log(partyVote);
