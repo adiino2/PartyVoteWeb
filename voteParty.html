@@ -148,7 +148,7 @@
 
         $(".choiceBtn").click(function ()
         {
-            if(takenIndexes.length < qNum+1)
+            if(takenIndexes.length < qNum)
             {
             	answers.push(parseInt(this.dataset.val));
                 var q = getNewQuestion();
@@ -164,6 +164,7 @@
             }
             else
             {
+		    answers.push(parseInt(this.dataset.val));
             	$buttons.hide();
 		    $nr.hide();
 	            var $canvas = $("<canvas/>");
