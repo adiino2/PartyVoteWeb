@@ -252,6 +252,9 @@
 	    
 	function moreq() {
 		qNum = qNum + 5;
+		$nr.empty().append("Fråga: ");
+		$nr.append(answers.length+1 + "/");
+		$nr.append(qNum);
 	}
 
 /*
@@ -375,8 +378,8 @@
 
     <button style="margin-left:10%;" onclick="Restart()">Gör ett nytt test</button>
 	
-	<div id="moreq">
-		<button style="margin-right:5%;" onclick="moreq()">Lägg till mer frågor</button>
+	<div id="moreq" style="margin-right:5%;">
+		<button onclick="moreq()">Lägg till mer frågor</button>
 	</div>
 
     <p class="bottom-three"> </p>
