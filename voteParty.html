@@ -180,13 +180,13 @@
                     }
                 }
                 
-                console.log(partyVote);
+                
                 for (var i = 0; i < partyVote.length; i++)
                 {
                 	console.log("nrANS = " + nrAns);
                 	partyVote[i] = Math.round((partyVote[i]/nrAns) * 10000)/100;
                 }
-                console.log(partyVote);
+                console.log("answers = " + answers);
 	            var myChart = new Chart($canvas[0], {
 		            type: 'bar',
 		            data: {
