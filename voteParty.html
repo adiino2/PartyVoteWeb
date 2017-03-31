@@ -24,6 +24,7 @@
         <li><a href="omoss.html">Om oss</a></li>
     </ul>
 
+    <center> <div id="nr"> </div> </center>
     <div id="contain"></div>
     <div id="buttons">
         <button data-val="1" class="choiceBtn">Ja</button>
@@ -116,15 +117,18 @@
         var takenIndexes =  [];
 
         var answers = [];
+	var nrAns; /* number of answers that is not avstår (0) */
 
         var $contain = $("#contain");
         var $buttons = $("#buttons");
+	var $nr = $("#nr");
 
         /**
         * Returns [newQuestion, newKey] from quetionArray and keyArray. To be replaced by modular JSON reader.
         **/
         function getNewQuestion()
         {
+		nrAns = 0;
         	if(!(takenIndexes.length == questionArray.length))
                 while(1)
                 {
@@ -149,6 +153,7 @@
             	answers.push(parseInt(this.dataset.val));
                 var q = getNewQuestion();
                 $contain.empty().append("<h3>" +q + "</h3>");
+		$nr.empty().append("NUMMER");
             }
             else
             {
@@ -159,18 +164,23 @@
                 for (var i = 0; i < qNum; i++)
                 {
                 	var key = keyArray[takenIndexes[i]];
+			
+			if(answers[i] != 0) {
+				nrAns++;
+			}
+			
                 	for (var j = 0; j < key.length; j++)
                     {
                     	if(key[j]*answers[i] > 0)
                     		partyVote[j] += Math.abs(key[j]);
                     }
                 }
-                console.log(takenIndexes);
+                
                 console.log(partyVote);
                 for (var i = 0; i < partyVote.length; i++)
                 {
                 	console.log(partyVote[i]);
-                	partyVote[i] = (partyVote[i]/qNum) * 100;
+                	partyVote[i] = Math.round((partyVote[i]/nrAns) * 10000)/100;
                 }
                 console.log(partyVote);
 	            var myChart = new Chart($canvas[0], {
