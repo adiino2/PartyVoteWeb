@@ -6,7 +6,9 @@
     <script src="./Chart.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    
+    <link rel="icon"
+          type="image/png"
+          href="http://www.iconj.com/icon.php?pid=0zw076hmv0">
 
     
 
@@ -28,10 +30,11 @@
 
     <div id="moreq"><center>
     <button onclick="contQuestions()">Lägg till mer frågor</button>
-        <h3>Du röstar som:</h3>
+        <h1>Du röstar som:</h1>
     </center></div>
     <div id="picture"></div>
-    <div id="contain"></div>
+    <div id="containparent" class="fraga"><span id="contain"></span></div>
+    <div id="graph" class="graf"></div>
     <center><h5><div id="link"></div></h5></center>
     <div id="buttons">
         <button data-val="1" class="choiceBtn">Ja</button>
@@ -165,6 +168,8 @@
 	    var $moreq = $("#moreq");
 	    var $picture = $("#picture");
 	    var $link = $("#link");
+	    var $graph = $("#graph");
+	    var $containparent = $("#containparent");
 
         /**
         * Returns [newQuestion, newKey] from quetionArray and keyArray. To be replaced by modular JSON reader.
@@ -220,7 +225,10 @@
 		    	    var $canvas = $("<canvas width=\"100\" height=\"100\" />");
 		        }
 		        $moreq.show();
-	            $contain.empty().append($canvas);
+		        $contain.empty();
+		        $containparent.hide();
+		        $graph.show();
+	            $graph.empty().append($canvas);
                 var partyVote = [0,0,0,0,0,0,0,0];
                 for (var i = 0; i < qNum; i++)
                 {
@@ -318,10 +326,6 @@
 					            }
 				            }]
 			            },
-			            layout: {
-				            padding: 50
-			            }
-
 		            }
 	            });
 
@@ -347,7 +351,8 @@
 	   
 
 	function contQuestions() { /*The user get the opportunity to continue answering questions */
-	    $contain.empty();
+	    $containparent.show();
+	    $graph.hide();
 	    $link.show();
 	    $buttons.show();
 	    $nr.show();
@@ -366,7 +371,7 @@
 
     <p class="bottom-three"> </p>
 
-    <button style="margin-left:10%;" onclick="Restart()">Gör ett nytt test</button>
+    <button id="omstart" onclick="Restart()">Gör ett nytt test</button>
 
     <p class="bottom-three"> </p>
 
