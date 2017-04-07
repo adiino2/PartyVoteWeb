@@ -1,26 +1,24 @@
-﻿@media only screen
-        and (min-device-width : 320px) 
-        and (max-device-width : 480px) {
-        body {
-    /*background-color: honeydew;*/
-    background-image: url("./partyLogo/clouds.png");
-    background-repeat: no-repeat;
-    background-position: right top;
-    background-attachment: fixed;
-    font-family: verdana;
-    color: dimgrey;
-}
-    }
-
-/*body {
-
+﻿body {
+    justify-content
     background-image: url("./partyLogo/bakgrund.png");
     background-repeat: no-repeat;
     background-position: right top;
     background-attachment: fixed;
     font-family: verdana;
     color: dimgrey;
-} */
+}
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    body {
+        /*background-color: honeydew;*/
+        background-image: url("./partyLogo/clouds.png");
+        background-repeat: no-repeat;
+        background-position: right top;
+        background-attachment: fixed;
+        font-family: verdana;
+        color: dimgrey;
+    }
+}
 
 h3 {
     font-size: 16 px;
@@ -97,6 +95,18 @@ img {
     line-height: 140px;
     margin: auto;
     padding: 12px;
+}
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    .fraga {
+        background-color: rgba(240, 255, 240, 0.6);
+        text-align: center;
+        width: 100%;
+        height: 500px;
+        line-height: 500px;
+        margin: auto;
+        padding: 12px;
+    }
 }
 
 span {
