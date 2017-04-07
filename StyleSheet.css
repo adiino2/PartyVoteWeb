@@ -1,6 +1,5 @@
 ﻿body {
-    justify-content
-    background-image: url("./partyLogo/bakgrund.png");
+    background-image: url("/partyLogo/bakgrund.png");
     background-repeat: no-repeat;
     background-position: right top;
     background-attachment: fixed;
