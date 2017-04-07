@@ -1,12 +1,21 @@
-﻿body {
-    /*background-color: honeydew;*/
-    background-image: url("./partyLogo/bakgrund.png");
-    @media only screen
+﻿@media only screen
         and (min-device-width : 320px) 
         and (max-device-width : 480px) {
-        background-image: url("./partyLogo/clouds.png");
+        body {
+    /*background-color: honeydew;*/
+    background-image: url("./partyLogo/clouds.png");
+    background-repeat: no-repeat;
+    background-position: right top;
+    background-attachment: fixed;
+    font-family: verdana;
+    color: dimgrey;
+}
     }
-        background-repeat: no-repeat;
+
+body {
+    /*background-color: honeydew;*/
+    background-image: url("./partyLogo/bakgrund.png");
+    background-repeat: no-repeat;
     background-position: right top;
     background-attachment: fixed;
     font-family: verdana;
