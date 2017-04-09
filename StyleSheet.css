@@ -67,19 +67,26 @@ img {
     width: 300px;
 }
 
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    .vrubrik {
+        padding-left: 2%;
+        width: 90%;
+    }
+}
+
 .buttonBIG {
     background-color: darkslategrey;
     border: none;
     color: white;
-    padding: 15px 16px;
-    margin-left: 1%;
+    padding: 15px 26px;
+    margin-left: 2%;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 50px;
 }
 
-/*<button class ="buttonBIG" onclick="window.location.href='voteParty.html'">BÖRJA DIREKT</button>*/
+
 
 .buttonBIG:hover
 {
