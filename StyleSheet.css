@@ -78,6 +78,9 @@ img {
     display: inline-block;
     font-size: 50px;
 }
+
+/*<button class ="buttonBIG" onclick="window.location.href='voteParty.html'">BÖRJA DIREKT</button>*/
+
 .buttonBIG:hover
 {
     cursor: pointer;
