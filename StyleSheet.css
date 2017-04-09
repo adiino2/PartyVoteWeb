@@ -71,12 +71,12 @@ img {
     background-color: darkslategrey;
     border: none;
     color: white;
-    padding: 15px 32px;
-    margin-left: 2%;
+    padding: 15px 16px;
+    margin-left: 1%;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 56px;
+    font-size: 50px;
 }
 .buttonBIG:hover
 {

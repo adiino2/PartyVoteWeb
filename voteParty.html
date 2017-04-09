@@ -43,18 +43,7 @@
     </div>
     <script language="javascript">
 
-        //------------------------------------
-        //
-        //  Senast uppdaterad: 26/3
-        //
-        //  Logg: 26/3 = Gjorde den adaptiv för mobiltelefoner 
-        //      25/3 = Fixade om svar inte är heltal, uppdatera utseende chart
-        //
-        //
-        //
-        //  Lägg till inläsning av keyArray och questionarray i headern
-        //
-        //--------------------------------------
+
 
         var qNum = 15;
 
@@ -184,7 +173,6 @@
                     var rand = Math.floor(Math.random() * questionArray.length);
                     var go = true;
 		            if(takenIndexes.indexOf(rand) != -1) {
-		    	        console.log(takenIndexes.indexOf(rand) != -1);
 		    	        go = false;
 		            }
                     if(go)
@@ -201,7 +189,6 @@
 
         $(".choiceBtn").click(function ()
         {
-            console.log(takenIndexes.length);
             if(takenIndexes.length < qNum)
             {
             	answers.push(parseInt(this.dataset.val));
@@ -241,7 +228,7 @@
                 	for (var j = 0; j < key.length; j++)
                     {
                     	if(key[j]*answers[i] > 0)
-                    		partyVote[j] += Math.abs(key[j]);
+                    	    partyVote[j] += Math.abs(key[j]);
                     }
                 }
                 
