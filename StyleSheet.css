@@ -3,6 +3,7 @@
     background-repeat: no-repeat;
     background-position: right top;
     background-attachment: fixed;
+    background-size: cover;
     font-family: verdana;
     color: dimgrey;
 }
@@ -14,6 +15,7 @@
         background-repeat: no-repeat;
         background-position: right top;
         background-attachment: fixed;
+        background-size: cover;
         font-family: verdana;
         color: dimgrey;
     }
