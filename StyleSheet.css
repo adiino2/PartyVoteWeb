@@ -18,6 +18,9 @@
         font-family: verdana;
         color: dimgrey;
     }
+    .html-mobile-background {
+        display: none;
+    }
 }
 
 h3 {
@@ -186,6 +189,7 @@ display: inline;
     bottom: 15px;
     margin-left:5%;
 }
+
 
 #buttons
 {
